@@ -1,0 +1,14 @@
+services:
+  squid:
+    build: .
+    container_name: squid-proxy
+    ports:
+      - "3128:3128"
+
+  demo:
+    image: curlimages/curl:latest
+    container_name: demo-client
+    depends_on:
+      - squid
+    # Keep container running for interactive testing
+    entrypoint: ["sh", "-c", "sleep infinity"]
