@@ -55,6 +55,27 @@ curl -x http://localhost:3128 http://example.com
 docker compose down
 ```
 
+## Sample Log Output
+
+After running `docker logs squid-proxy`, you should see output similar to:
+
+```
+2026/02/23 11:31:07| helperOpenServers: Starting 1/5 'https-to-http' processes
+2026/02/23 11:31:07| Logfile: opening log daemon:/var/log/squid/access.log
+2026/02/23 11:31:07| Local cache digest enabled; rebuild/rewrite every 3600/3600 sec
+2026/02/23 11:31:07| Max Mem  size: 262144 KB
+2026/02/23 11:31:07| Max Swap size: 0 KB
+2026/02/23 11:31:07| Accepting HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 14 flags=9
+    listening port: 3128
+2026/02/23 11:31:08| storeLateRelease: released 0 objects
+[rewriter] http://example.com/ -> https://example.com/
+1771846271.801     54 172.20.0.3 TCP_MISS/200 922 GET http://example.com/ - HIER_DIRECT/104.18.26.120 text/html
+[rewriter] http://example.com/ -> https://example.com/
+1771846298.698      0 172.20.0.3 TCP_MEM_HIT/200 923 GET http://example.com/ - HIER_NONE/- text/html
+```
+
+Lines prefixed with `[rewriter]` are emitted by the Rust URL rewriter, showing the `http → https` conversion. The Squid access log lines confirm the request was served successfully (`200`) and show cache behavior (`TCP_MISS` on first request, `TCP_MEM_HIT` on subsequent ones).
+
 ## Configuration
 
 ### Squid (`squid.conf`)
