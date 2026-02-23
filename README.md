@@ -115,6 +115,10 @@ cargo build --release
 
 The binary is produced at `target/release/https-to-http` and can be used as a standalone Squid `url_rewrite_program`.
 
+## Additional Guides
+
+- [Deploy an HTTPS Echo Server on Azure Container Instance](ACI_HTTPS_ECHO.md) — deploy a demo echo container on ACI with HTTP (80) and HTTPS (443) ports.
+
 ## License
 
 This project is provided as-is for educational and operational use.
