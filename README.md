@@ -14,6 +14,20 @@ Client ──► Squid (port 3128) ──► URL rewriter (Rust) ──► Targe
 
 This is useful when you have legacy applications or devices that only speak HTTP and you want to transparently upgrade all their traffic to HTTPS.
 
+## Container Image
+
+Pre-built images are published to GitHub Container Registry on every versioned release:
+
+```
+ghcr.io/lgiuliani80/squid_httptohttps:<tag>
+```
+
+For example, to pull the `v1.0.0` image:
+
+```bash
+docker pull ghcr.io/lgiuliani80/squid_httptohttps:v1.0.0
+```
+
 ## Quick Start
 
 ### Prerequisites
